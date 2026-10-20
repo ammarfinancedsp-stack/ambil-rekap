@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ambil Rekap">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Ambil Rekap — DSPX</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #0a0a0a; overflow: hidden; }
+  iframe { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; background: #0a0a0a; }
+  #boot { position: fixed; inset: 0; display: grid; place-items: center; color: #9e9687;
+          font: 600 14px system-ui, sans-serif; background: #0a0a0a; transition: opacity .3s; }
+  #boot.off { opacity: 0; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="boot">Memuat Portal Ambil Rekap…</div>
+<!-- GANTI ID_ANDA dengan ID deployment Apps Script (URL /exec) -->
+<iframe id="app"
+  src="https://script.google.com/macros/s/ID_ANDA/exec?page=ambil"
+  allow="clipboard-write; fullscreen"></iframe>
+<script>
+  const f = document.getElementById('app');
+  f.addEventListener('load', () => document.getElementById('boot').classList.add('off'));
+  setTimeout(() => document.getElementById('boot').classList.add('off'), 8000);
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+</script>
+</body>
+</html>
